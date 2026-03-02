@@ -45,8 +45,13 @@ st.markdown("""
   .streamlit-expanderHeader { font-size: 1rem; padding: 0.75rem 0; }
 
   /* 상단 헤더 */
-  h1 { font-size: 1.5rem !important; }
-  h3 { font-size: 1.1rem !important; }
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.5 !important;
+    overflow: visible !important;
+    padding: 0.25rem 0 !important;
+  }
+  h3 { font-size: 1.1rem !important; line-height: 1.5 !important; }
 </style>
 """, unsafe_allow_html=True)
 
