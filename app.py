@@ -6,14 +6,17 @@ import plotly.graph_objects as go
 from dotenv import load_dotenv
 
 load_dotenv()
-auth_key = os.getenv("KMA_AUTH_KEY", "")
 
 st.set_page_config(layout="wide", page_title="기온 비교 대시보드")
 st.title("🌡️ 연도별 지정 기간 기온 비교 대시보드")
 
+# 인증키 로딩 우선순위: .env → st.secrets → 사이드바 직접 입력
+auth_key = os.getenv("KMA_AUTH_KEY", "")
 if not auth_key:
-    st.error("⚠️ .env 파일에 KMA_AUTH_KEY가 설정되지 않았습니다.")
-    st.stop()
+    try:
+        auth_key = st.secrets["KMA_AUTH_KEY"]
+    except Exception:
+        auth_key = ""
 
 # ─── 전체 지상관측 지점 데이터 ───────────────────
 STATIONS = pd.DataFrame([
@@ -124,6 +127,21 @@ max_days = {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
 # ─── 사이드바 ────────────────────────────────
 with st.sidebar:
     st.header("⚙️ 설정 패널")
+
+    # 인증키가 없으면 사이드바에서 직접 입력
+    if not auth_key:
+        st.subheader("🔑 API 인증키 입력")
+        input_key = st.text_input(
+            "기상청 API 인증키",
+            type="password",
+            placeholder="apihub.kma.go.kr에서 발급",
+            help=".env 파일 또는 st.secrets['KMA_AUTH_KEY']로도 설정 가능합니다."
+        )
+        if input_key:
+            auth_key = input_key
+        else:
+            st.warning("인증키를 입력해야 데이터를 조회할 수 있습니다.")
+        st.divider()
 
     # 지점 선택 — 검색 + 지도
     st.subheader("📍 관측소 선택")
