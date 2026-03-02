@@ -352,7 +352,7 @@ elif st.button("🚀 데이터 불러오기", type="primary"):
         with st.expander("📋 상세 데이터 보기"):
             st.dataframe(
                 merged_df[data_cols].style.format("{:.1f}", na_rep="-"),
-                use_container_width=True
+                width="stretch"
             )
     else:
         st.error("데이터를 불러오지 못했습니다. 기간 또는 연도를 확인해주세요.")
