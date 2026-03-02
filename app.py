@@ -44,19 +44,19 @@ st.markdown("""
   /* expander 터치 영역 확장 */
   .streamlit-expanderHeader { font-size: 1rem; padding: 0.75rem 0; }
 
-  /* 상단 헤더 */
-  h1 {
-    font-size: 1.5rem !important;
-    line-height: 1.5 !important;
-    overflow: visible !important;
-    padding: 0.25rem 0 !important;
-  }
   h3 { font-size: 1.1rem !important; line-height: 1.5 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🌡️ 연도별 기온 비교")
-st.caption("기상청 API · 지정 기간 연도별 비교")
+st.markdown("""
+<div style="padding: 0.5rem 0 0.25rem; overflow: visible;">
+  <span style="font-size:1.6rem; font-weight:700; line-height:1.6; display:block;">
+    🌡️ 연도별 기온 비교
+  </span>
+  <span style="font-size:0.85rem; color:#888;">기상청 API · 지정 기간 연도별 비교</span>
+</div>
+""", unsafe_allow_html=True)
+
 
 # ─── 전체 지상관측 지점 ─────────────────────────────
 STATIONS = pd.DataFrame([
