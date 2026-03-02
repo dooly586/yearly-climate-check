@@ -48,7 +48,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.header("🌡️ 연도별 지역기온 비교")
+st.header("🌡️ 연도별 기온 비교")
 st.caption("기상청 API · 지정 기간 연도별 비교")
 
 
