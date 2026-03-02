@@ -182,8 +182,10 @@ with st.expander("🗺️ 관측소 위치 확인"):
         map=dict(style="open-street-map",
                  center=dict(lat=selected_row["lat"], lon=selected_row["lon"]), zoom=7),
         height=300, margin=dict(l=0, r=0, t=0, b=0), showlegend=False,
+        dragmode=False,    # 모바일에서 지도 실수 이동 방지
     )
-    st.plotly_chart(fig_map, width="stretch")
+    st.plotly_chart(fig_map, width="stretch",
+                    config={"displayModeBar": False, "scrollZoom": False})
 
 
 # ─── fetch 함수 ──────────────────────────────────────
@@ -278,10 +280,13 @@ if submitted:
             yaxis=dict(title="기온 (°C)", tickfont=dict(size=11)),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             hovermode="x unified",
+            dragmode=False,          # ← 모바일 터치 시 판/줄 안됨
             height=380,
             margin=dict(l=40, r=10, t=40, b=60),
         )
-        st.plotly_chart(fig, width="stretch")
+        # displayModeBar=False: 모드바 숨김 / scrollZoom=False: 스크롤 커지 안됨
+        CHART_CFG = {"displayModeBar": False, "scrollZoom": False}
+        st.plotly_chart(fig, width="stretch", config=CHART_CFG)
 
         # 평균 카드 — 2열로 (모바일 화면 폭 고려)
         st.subheader("📊 평균 기온")
