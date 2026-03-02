@@ -48,14 +48,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div style="padding: 0.5rem 0 0.25rem; overflow: visible;">
-  <span style="font-size:1.6rem; font-weight:700; line-height:1.6; display:block;">
-    🌡️ 연도별 기온 비교
-  </span>
-  <span style="font-size:0.85rem; color:#888;">기상청 API · 지정 기간 연도별 비교</span>
-</div>
-""", unsafe_allow_html=True)
+st.header("🌡️ 연도별 기온 비교")
+st.caption("기상청 API · 지정 기간 연도별 비교")
 
 
 # ─── 전체 지상관측 지점 ─────────────────────────────
