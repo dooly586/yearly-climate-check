@@ -20,8 +20,8 @@ st.set_page_config(page_title="기온 비교 대시보드", page_icon="🌡️")
 # ─── 모바일 최적화 CSS ───────────────────────────────
 st.markdown("""
 <style>
-  /* 전체 패딩 축소 */
-  .block-container { padding: 1rem 1rem 3rem !important; max-width: 100% !important; }
+  /* 전체 패딩 축소 (top은 툴바 가림 방지를 위해 충분히 확보) */
+  .block-container { padding: 3.5rem 1rem 3rem !important; max-width: 100% !important; }
 
   /* 버튼 크게 */
   .stButton > button {
