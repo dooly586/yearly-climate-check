@@ -11,10 +11,12 @@ st.set_page_config(layout="wide", page_title="기온 비교 대시보드")
 st.title("🌡️ 연도별 지정 기간 기온 비교 대시보드")
 
 # 인증키 로딩 우선순위: .env → st.secrets → 사이드바 직접 입력
-auth_key = os.getenv("KMA_AUTH_KEY", "")
+# .env: KMA_AUTH_KEY 또는 KMA_API_KEY 모두 지원
+auth_key = os.getenv("KMA_AUTH_KEY", "") or os.getenv("KMA_API_KEY", "")
 if not auth_key:
     try:
-        auth_key = st.secrets["KMA_AUTH_KEY"]
+        # Streamlit Cloud Secrets: KMA_API_KEY 또는 KMA_AUTH_KEY
+        auth_key = st.secrets.get("KMA_API_KEY", "") or st.secrets.get("KMA_AUTH_KEY", "")
     except Exception:
         auth_key = ""
 
